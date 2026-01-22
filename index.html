@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KARLDAY | Bazar de Moda</title>
+  <meta name="description" content="KARLDAY - Bazar de moda (sector terciario). Página empresarial creada con HTML, CSS y JavaScript." />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Aquí yo enlazo mi JavaScript de la Actividad 2 (debe existir app.js en esta misma carpeta) -->
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <!-- Aquí yo agrego un skip link para accesibilidad -->
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">KARLDAY</a>
+
+      <ul class="nav__links">
+        <li><a href="#tareas">Tareas</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <section id="inicio" class="hero" aria-labelledby="titulo-hero">
+      <div class="hero__content">
+        <h1 id="titulo-hero">KARLDAY</h1>
+
+        <!-- Aquí yo cambio el texto por Misión y Visión -->
+        <p class="hero__subtitle">
+          <strong>Misión:</strong> Brindar moda femenina con estilo y calidad, ofreciendo una experiencia cercana, confiable y personalizada, para que cada clienta se sienta segura y auténtica en su día a día.<br><br>
+          <strong>Visión:</strong> Convertir a KARLDAY en un bazar referente en Guadalajara y en línea, reconocido por su atención al detalle, colecciones curadas y crecimiento constante, manteniendo siempre un trato humano y profesional.
+        </p>
+
+        <div class="hero__badges" aria-label="Características principales">
+          <span class="badge">Moda</span>
+          <span class="badge">Estilo</span>
+          <span class="badge">Envíos</span>
+        </div>
+
+        <a class="btn" href="#proyectos">Ver proyectos</a>
+      </div>
+
+      <div class="hero__image">
+        <img
+          src="img/hero.jpg"
+          alt="Imagen promocional de KARLDAY: moda femenina con estilo elegante."
+          loading="lazy"
+        />
+      </div>
+    </section>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido" class="main" role="main">
+
+    <!-- ====================== ACTIVIDAD 2: GESTOR DE TAREAS ====================== -->
+    <section id="tareas" class="section section--alt" aria-labelledby="titulo-tareas">
+      <div class="section__head">
+        <h2 id="titulo-tareas">Gestor de tareas</h2>
+        <p>
+          Aquí yo puedo agregar, editar y eliminar tareas. También puedo marcarlas como completas/incompletas,
+          buscar por texto, filtrar por estado, asignar prioridad y ver el progreso. Todo se guarda en LocalStorage.
+        </p>
+      </div>
+
+      <div class="todo" aria-label="Aplicación de gestión de tareas">
+        <!-- Aquí yo pongo input + prioridad + botón (estructura base) -->
+        <div class="todo__controls">
+          <label class="sr-only" for="nueva-tarea">Nueva tarea</label>
+          <input class="todo__input" type="text" id="nueva-tarea" placeholder="Escribe tu tarea..." autocomplete="off" />
+
+          <label class="sr-only" for="prioridad">Prioridad</label>
+          <select class="todo__select" id="prioridad" aria-label="Seleccionar prioridad">
+            <option value="alta">Prioridad: Alta</option>
+            <option value="media">Prioridad: Media</option>
+            <option value="baja">Prioridad: Baja</option>
+          </select>
+
+          <button class="btn btn--dark" id="agregar-tarea" type="button">Agregar tarea</button>
+        </div>
+
+        <!-- Aquí yo muestro mensajes de error si intentan guardar vacío -->
+        <p id="error" class="todo__error" role="alert" aria-live="polite"></p>
+
+        <!-- Aquí yo agrego buscador + filtros (extra pro) -->
+        <div class="todo__tools">
+          <label class="sr-only" for="buscar-tareas">Buscar tareas</label>
+          <input class="todo__search" id="buscar-tareas" type="text" placeholder="Buscar tareas..." autocomplete="off" />
+
+          <div class="todo__filters" role="group" aria-label="Filtros de tareas">
+            <button class="todo__chip is-active" type="button" data-filter="todas" aria-pressed="true">Todas</button>
+            <button class="todo__chip" type="button" data-filter="pendientes" aria-pressed="false">Pendientes</button>
+            <button class="todo__chip" type="button" data-filter="completadas" aria-pressed="false">Completadas</button>
+          </div>
+        </div>
+
+        <!-- Aquí yo muestro el progreso -->
+        <div class="todo__progress">
+          <div class="todo__bar" aria-label="Barra de progreso">
+            <div id="progreso-fill" class="todo__barFill" style="width: 0%"></div>
+          </div>
+          <span id="progreso-porcentaje" class="todo__percent">0%</span>
+        </div>
+
+        <!-- Aquí yo muestro contador + botón limpiar (con más espacio, ya no va pegado) -->
+        <div class="todo__meta">
+          <span id="contador-tareas">0/0 completadas</span>
+          <button class="todo__btn todo__btn--ghost" id="limpiar-tareas" type="button">Limpiar todo</button>
+        </div>
+
+        <!-- Aquí yo uso UL para mostrar las tareas (requisito) -->
+        <ul id="lista-tareas" class="todo__list"></ul>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="section" aria-labelledby="titulo-proyectos">
+      <div class="section__head">
+        <h2 id="titulo-proyectos">Proyectos destacados</h2>
+        <p>Estas actividades representan el enfoque del bazar: colecciones curadas, looks completos y atención al cliente.</p>
+      </div>
+
+      <div class="grid" role="list">
+        <article class="card" role="listitem">
+          <img src="img/proyecto1.jpg" alt="Outfit elegante en tonos neutros, ideal para oficina o eventos." loading="lazy" />
+          <div class="card__body">
+            <h3>Colección Neutrals 2026</h3>
+            <p>Selección de prendas minimalistas y combinables, pensadas para un estilo sofisticado y versátil.</p>
+            <a class="link" href="#contacto">Preguntar disponibilidad</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img src="img/proyecto2.jpg" alt="Accesorios femeninos y bolsas en tonos rosa y beige." loading="lazy" />
+          <div class="card__body">
+            <h3>Accesorios & Complementos</h3>
+            <p>Bolsas y accesorios para elevar cualquier look. Recomendaciones personalizadas según tu estilo.</p>
+            <a class="link" href="#contacto">Solicitar recomendación</a>
+          </div>
+        </article>
+
+        <article class="card" role="listitem">
+          <img src="img/proyecto3.jpg" alt="Ropa en rack tipo boutique con estética rosa palo." loading="lazy" />
+          <div class="card__body">
+            <h3>Ventas por Instagram + Envíos</h3>
+            <p>Atención rápida y clara. Cotización y seguimiento por mensaje, con opciones de entrega local.</p>
+            <a class="link" href="https://instagram.com" target="_blank" rel="noopener noreferrer">Ver Instagram</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="section section--alt" aria-labelledby="titulo-contacto">
+      <div class="section__head">
+        <h2 id="titulo-contacto">Contacto</h2>
+        <p>Llena el formulario y te responderemos.</p>
+      </div>
+
+      <form class="form" action="#" method="post" aria-label="Formulario de contacto KARLDAY">
+        <div class="form__group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required minlength="2" />
+        </div>
+
+        <div class="form__group">
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" name="correo" type="email" placeholder="tunombre@correo.com" required />
+        </div>
+
+        <div class="form__group">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué estás buscando..." required minlength="10"></textarea>
+        </div>
+
+        <button class="btn btn--dark" type="submit">Enviar mensaje</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="footer__content">
+      <p class="footer__brand">KARLDAY</p>
+      <p class="footer__text">Bazar de moda · Comercio (sector terciario)</p>
+
+      <div class="footer__links" aria-label="Redes sociales">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+
+      <p class="footer__copy">© <span id="year"></span> KARLDAY. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Aquí yo dejo el año automático como lo tenía antes.
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
